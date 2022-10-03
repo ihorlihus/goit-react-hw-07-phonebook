@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact, getContacts } from '../../redux/contSlice';
-
+import { getContacts } from '../../redux/selectors';
 import Button from 'components/ButtonStiled/Button';
 import { ContactFormWrap } from './ContactFirmStyled';
+import { addContact } from 'redux/operations';
 
 function SignUpForm() {
   const contactsState = useSelector(getContacts);

@@ -1,34 +1,26 @@
 import Button from './../ButtonStiled/Button';
 import { useDispatch } from 'react-redux';
-import { delContact } from '../../redux/contSlice';
 import { ListItemWrap, List } from './ContactListStyled';
+import { deleteContact } from './../../redux/operations';
 
 const ContactList = ({ contacts }) => {
   const dispatch = useDispatch();
 
   const handleDelContact = id => {
-    dispatch(delContact(id));
+    dispatch(deleteContact(id));
   };
 
   return (
-    <>
-      {contacts.length > 0 ? (
-        <List>
-          {contacts.map(contact => {
-            return (
-              <ListItemWrap key={contact.id}>
-                {contact.name}: {contact.number}
-                <Button onClick={() => handleDelContact(contact.id)}>
-                  Delete
-                </Button>
-              </ListItemWrap>
-            );
-          })}
-        </List>
-      ) : (
-        <p>No any contact! add new</p>
-      )}
-    </>
+    <List>
+      {contacts.map(contact => {
+        return (
+          <ListItemWrap key={contact.id}>
+            {contact.name}: {contact.phone}
+            <Button onClick={() => handleDelContact(contact.id)}>Delete</Button>
+          </ListItemWrap>
+        );
+      })}
+    </List>
   );
 };
 
