@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { getContacts } from '../../redux/selectors';
-import Button from 'components/ButtonStiled/Button';
+import { selectContacts } from '../../redux/selectors';
 import { ContactFormWrap } from './ContactFirmStyled';
 import { addContact } from 'redux/operations';
+import Button from 'components/ButtonStiled/Button';
 
 function SignUpForm() {
-  const contactsState = useSelector(getContacts);
+  const contactsInState = useSelector(selectContacts);
   const dispatch = useDispatch();
 
   const handleSubmit = event => {
@@ -14,8 +14,10 @@ function SignUpForm() {
     const name = form.elements.name.value;
     const number = form.elements.number.value;
 
-    contactsState.find(contact => contact.name.toLowerCase() === name)
-      ? alert(name + ' is already in contacts')
+    contactsInState.find(
+      contact => contact.name.toLowerCase() === name.toLowerCase()
+    ) || contactsInState.find(contact => contact.phone === number)
+      ? alert('This name or nomber is already in contacts')
       : dispatch(addContact({ name, number }));
     form.reset();
   };
